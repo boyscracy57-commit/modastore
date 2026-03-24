@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>ModaStore | Giyim Mağazası</title>
+    <link rel="stylesheet" href="giyimticaret.css">
+</head>
+<script>
+function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let existing = cart.find(item => item.name === name);
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        cart.push({name: name, price: price, quantity: 1});
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    window.location.href = 'index.html'; 
+}
+
+function updateCart() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cartItems = document.getElementById('cart-items');
+    let cartTotal = document.getElementById('cart-total');
+
+    if(!cartItems || !cartTotal) return;
+
+    cartItems.innerHTML = '';
+    let total = 0;
+
+    if(cart.length === 0){
+        cartItems.innerHTML = '<p>Sepetinizde henüz ürün yok.</p>';
+        cartTotal.innerText = 'Toplam: 0 ₺';
+        return;
+    }
+
+    cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+        let li = document.createElement('li');
+        li.innerHTML = `
+            ${item.name} x ${item.quantity} - ${item.price * item.quantity} ₺
+            <button onclick="removeItem(${index})" style="margin-left:10px;">Sil</button>
+        `;
+        cartItems.appendChild(li);
+    });
+
+    cartTotal.innerText = `Toplam: ${total} ₺`;
+}
+
+function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+}
+
+function clearCart() {
+    localStorage.removeItem('cart');
+    updateCart();
+}
+
+window.addEventListener('load', updateCart);
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const checkoutForm = document.getElementById('checkout-form');
+    const paymentForm = document.getElementById('payment-form');
+    const paymentSuccess = document.getElementById('payment-success');
+
+    checkoutBtn.addEventListener('click', () => {
+        checkoutForm.style.display = 'block'; 
+        window.scrollTo({ top: checkoutForm.offsetTop, behavior: 'smooth' });
+    });
+
+    paymentForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    window.location.href = "adres.html";
+    });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const checkoutForm = document.getElementById('checkout-form');
+
+    checkoutBtn.addEventListener('click', () => {
+        checkoutForm.style.display = 'block';
+        window.scrollTo({ top: checkoutForm.offsetTop, behavior: 'smooth' });
+    });
+
+    
+    const paymentForm = document.getElementById('payment-form');
+    paymentForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        window.location.href = "adres.html"; 
+    });
+});
+
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const checkoutForm = document.getElementById('checkout-form');
+    const paymentForm = document.getElementById('payment-form');
+
+   
+    checkoutBtn.addEventListener('click', () => {
+        checkoutForm.style.display = 'block';
+        window.scrollTo({ top: checkoutForm.offsetTop, behavior: 'smooth' });
+    });
+
+   
+    paymentForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        window.location.href = "adres.html";
+    });
+
+    
+    const cardInput = document.getElementById("card-number");
+    cardInput.addEventListener("input", function(e){
+        let value = e.target.value.replace(/\D/g, ""); 
+        value = value.substring(0,16); 
+        let parts = [];
+        for(let i=0;i<value.length;i+=4){
+            parts.push(value.substring(i,i+4));
+        }
+        e.target.value = parts.join(" ");
+    });
+
+    
+    const expiryInput = document.getElementById("expiry");
+    expiryInput.addEventListener("input", function(e){
+        let value = e.target.value.replace(/\D/g, ""); 
+        if(value.length > 2){
+            value = value.substring(0,2) + "/" + value.substring(2,4);
+        }
+        e.target.value = value;
+    });
+
+    
+    const cvvInput = document.getElementById("cvv");
+    cvvInput.addEventListener("input", function(e){
+        e.target.value = e.target.value.replace(/\D/g, "").substring(0,3);
+    });
+});
+
+function openDetail(url){
+    window.location.href = url; 
+}
+</script>
+
+
+
+
+<body>
+
+    
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="images.jfif" alt="ModaStore Logo">
+                <h1>ModaStore</h1>
+            </div>
+            <nav class="nav">
+        <ul class="nav-menu">
+         <li><a href="#home">Ana Sayfa</a></li>
+         <li><a href="#products">Ürünler</a></li>
+         <li><a href="#cart">Sepet</a></li>
+         <li><a href="#contact">İletişim</a></li>
+         </ul>
+           </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+    <div class="hero-content">
+        <h2>Yeni Sezon Koleksiyonu</h2>
+        <p>%30'a varan indirimleri kaçırma</p>
+        <button class="hero-btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+Alışverişe Başla
+</button>
+    </div>
+    </section>
+
+    
+    <main class="container">
+
+        
+        <section class="products" id="products">
+            <div class="product">
+         <a href="urun1.html">
+        <img src="images (1).jfif" alt="Tişört">
+        <h3>Basic T-Shirt</h3>
+        </a>
+        <p class="price">699 ₺</p>
+       <button class="checkout" onclick="addToCart('Basic T-Shirt', 699)">Sepete Ekle</button>
+       <button class="detail-btn" onclick="openDetail('urun1.html')" 
+        style="margin-left:10px; padding:5px 10px; font-size:14px; border-radius:5px; border:none; background:#0d1b2a; color:white; cursor:pointer;">
+    Detay
+</button>
+       </div>
+
+            <div class="product">
+          <a href="urun2.html">
+        <img src="kabartmali-kapusonlu-oversize-siyah-hoodie.jpg" alt="Oversize Hoodie" />
+        <h3>Oversize Hoodie</h3>
+        </a>
+        <p class="price">999 ₺</p>
+        <button class="checkout" onclick="addToCart('Oversize Hoodie', 999)">Sepete Ekle</button>
+        <button class="detail-btn" onclick="openDetail('urun2.html')" 
+        style="margin-left:10px; padding:5px 10px; font-size:14px; border-radius:5px; border:none; background:#0d1b2a; color:white; cursor:pointer;">
+    Detay
+</button>
+         </div>
+
+            <div class="product">
+                <a href="urun3.html">
+                <img src="baggy-kot-pantolon-buz-mavi-e-ac61.jpeg" alt="Pantolon">
+                <h3>Kot Pantolon</h3>
+                </a>
+                <p class="price">1699₺</p>
+                <button class="checkout" onclick="addToCart('Kot Pantolon', 1699)">Sepete Ekle</button>
+                <button class="detail-btn" onclick="openDetail('urun3.html')" 
+        style="margin-left:10px; padding:5px 10px; font-size:14px; border-radius:5px; border:none; background:#0d1b2a; color:white; cursor:pointer;">
+    Detay
+</button>
+            </div>
+
+            <div class="product">
+                <a href="urun4.html">
+                <img src="premium-ozel-desen-cift-cepli-mevsimli-dff562.jpg" alt="Ceket">
+                <h3>Mevsimlik Ceket</h3>
+                </a>
+                <p class="price">1999₺</p>
+                <button class="checkout" onclick="addToCart('Mevsimlik Ceket', 1999)">Sepete Ekle</button>
+                <button class="detail-btn" onclick="openDetail('urun4.html')" 
+        style="margin-left:10px; padding:5px 10px; font-size:14px; border-radius:5px; border:none; background:#0d1b2a; color:white; cursor:pointer;">
+    Detay
+</button>
+            </div>
+        </section>
+
+        
+        <section class="cart" id="cart">
+    <h2>Sepet</h2>
+    <div class="cart-content" id="cart-content">
+        <ul id="cart-items"></ul> 
+        <p class="total" id="cart-total">Toplam: 0 ₺</p>
+        <button onclick="clearCart()">Sepeti Temizle</button>
+        <button id="checkout-btn">Ödeme Yap</button>
+    </div>
+    </section>
+
+    <section id="checkout-form" style="display:none; margin-top:20px;">
+    <h2>Ödeme Formu</h2>
+
+    <form id="payment-form">
+        <input type="text" id="name" placeholder="Kart Üzerindeki İsim" required class="input">
+
+        <input type="text" id="card-number" maxlength="19" inputmode="numeric" placeholder="1234 5678 9012 3456" required class="input">
+
+        <div class="card-row">
+            <input type="text" id="expiry" maxlength="5" inputmode="numeric" placeholder="AA/YY" required class="input small-input">
+            <input type="text" id="cvv" maxlength="4" inputmode="numeric" placeholder="CVV" required class="input small-input">
+        </div>
+
+        <button type="submit" class="checkout">Öde</button>
+    </form>
+</section>
+    </main>
+
+    
+   <footer class="footer" id="contact">
+    <h3>İletişim</h3>
+    <p>📞 Telefon: 0555 123 45 67</p>
+    <p>📧 Email: destek@modastore.com</p>
+    <p>📍 Adres: İstanbul, Türkiye</p>
+
+    <hr style="margin:15px 0; opacity:0.3;">
+
+    <p>© 2026 ModaStore | Tüm Hakları Saklıdır</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Oversize Hoodie | ModaStore</title>
+    <link rel="stylesheet" href="urun2detay.css" />
+</head>
+<script>
+function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let existing = cart.find(item => item.name === name);
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        cart.push({name: name, price: price, quantity: 1});
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    window.location.href = 'index.html'; 
+}
+
+function updateCart() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cartItems = document.getElementById('cart-items');
+    let cartTotal = document.getElementById('cart-total');
+
+    if(!cartItems || !cartTotal) return;
+
+    cartItems.innerHTML = '';
+    let total = 0;
+
+    if(cart.length === 0){
+        cartItems.innerHTML = '<p>Sepetinizde henüz ürün yok.</p>';
+        cartTotal.innerText = 'Toplam: 0 ₺';
+        return;
+    }
+
+    cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+        let li = document.createElement('li');
+        li.innerHTML = `
+            ${item.name} x ${item.quantity} - ${item.price * item.quantity} ₺
+            <button onclick="removeItem(${index})" style="margin-left:10px;">Sil</button>
+        `;
+        cartItems.appendChild(li);
+    });
+
+    cartTotal.innerText = `Toplam: ${total} ₺`;
+}
+
+function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+}
+
+function clearCart() {
+    localStorage.removeItem('cart');
+    updateCart();
+}
+
+window.addEventListener('load', updateCart);
+</script>
+<body>
+
+<header class="header">
+    <div class="container header-container">
+        <div class="logo">
+            <h1>ModaStore</h1>
+        </div>
+    </div>
+</header>
+
+<main class="container urun-detay">
+
+    <div class="urun-resim">
+        <img src="kabartmali-kapusonlu-oversize-siyah-hoodie.jpg" alt="Oversize Hoodie" />
+    </div>
+
+    <div class="urun-bilgi">
+        <h2>Oversize Hoodie</h2>
+        <p class="price">999 ₺</p>
+
+        <ul>
+            <li>Yumuşak ve kalın kumaş</li>
+            <li>Oversize rahat kesim</li>
+            <li>Kış sezonu için ideal</li>
+            <li>Unisex tasarım</li>
+            <li>Makinede 30° yıkanabilir</li>
+        </ul>
+
+        <button class="checkout" onclick="addToCart('Oversize Hoodie', 999)">Sepete Ekle</button>
+    </div>
+
+</main>
+
+</body>
+</html>

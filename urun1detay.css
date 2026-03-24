@@ -1,0 +1,73 @@
+.urun-detay {
+    display: flex;
+    gap: 50px;
+    margin: 80px auto;
+    align-items: center;
+    max-width: 900px;
+    padding: 0 15px;
+}
+
+.urun-resim img {
+    width: 100%;       
+    max-width: 220px;  
+    height: auto;      
+    border-radius: 12px;
+    object-fit: cover;
+    display: block;  
+}
+
+.urun-bilgi h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: #0d1b2a;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff6f61;
+    margin-bottom: 20px;
+}
+
+.urun-bilgi ul {
+    margin: 20px 0;
+    line-height: 1.8;
+    color: #333;
+}
+
+.checkout {
+    background: linear-gradient(135deg, #0a8f08, #0fc10f);
+    color: white;
+    border: none;
+    padding: 14px 0;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+    max-width: 600px;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(15,193,15,0.5);
+}
+
+.checkout:hover {
+    background: linear-gradient(135deg, #0fc10f, #0a8f08);
+    box-shadow: 0 8px 25px rgba(15,193,15,0.7);
+}
+
+.header {
+    background-color: #0d1b2a;
+    color: #fff;
+    padding: 20px 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+}

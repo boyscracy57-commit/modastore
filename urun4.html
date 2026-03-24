@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mevsimlik Ceket | ModaStore</title>
+    <link rel="stylesheet" href="urun3detay.css">
+</head>
+<script>
+function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let existing = cart.find(item => item.name === name);
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        cart.push({name: name, price: price, quantity: 1});
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    window.location.href = 'index.html'; 
+}
+
+function updateCart() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cartItems = document.getElementById('cart-items');
+    let cartTotal = document.getElementById('cart-total');
+
+    if(!cartItems || !cartTotal) return;
+
+    cartItems.innerHTML = '';
+    let total = 0;
+
+    if(cart.length === 0){
+        cartItems.innerHTML = '<p>Sepetinizde henüz ürün yok.</p>';
+        cartTotal.innerText = 'Toplam: 0 ₺';
+        return;
+    }
+
+    cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+        let li = document.createElement('li');
+        li.innerHTML = `
+            ${item.name} x ${item.quantity} - ${item.price * item.quantity} ₺
+            <button onclick="removeItem(${index})" style="margin-left:10px;">Sil</button>
+        `;
+        cartItems.appendChild(li);
+    });
+
+    cartTotal.innerText = `Toplam: ${total} ₺`;
+}
+
+function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+}
+
+function clearCart() {
+    localStorage.removeItem('cart');
+    updateCart();
+}
+
+window.addEventListener('load', updateCart);
+</script>
+
+<body>
+
+<header class="header">
+    <div class="container header-container">
+        <div class="logo">
+            <h1>ModaStore</h1>
+        </div>
+    </div>
+</header>
+
+<main class="container urun-detay">
+
+    <div class="urun-resim">
+        <img src="premium-ozel-desen-cift-cepli-mevsimli-dff562.jpg" alt="Mevsimlik Ceket">
+    </div>
+
+    <div class="urun-bilgi">
+        <h2>Mevsimlik Ceket</h2>
+        <p class="price">1999 ₺</p>
+
+        <ul>
+            <li>Hafif ve nefes alabilen kumaş</li>
+            <li>İlkbahar & Sonbahar için ideal</li>
+            <li>Çift cepli modern tasarım</li>
+            <li>Regular fit kesim</li>
+            <li>30° makinede yıkanabilir</li>
+        </ul>
+
+        <button class="checkout" onclick="addToCart('Mevsimlik Ceket', 1999)">Sepete Ekle</button>
+    </div>
+
+</main>
+
+</body>
+</html>

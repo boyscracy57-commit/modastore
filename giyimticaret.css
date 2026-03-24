@@ -1,0 +1,384 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(120deg, #f5f5f5, #e0e0f0);
+    color: #333;
+}
+
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+
+.header {
+    background: #0d1b2a;
+    color: #fff;
+    padding: 20px 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    background-color: #111827;
+    
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    size: 50dvh;
+}
+
+.logo img {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.logo h1 {
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: #fff;
+}
+
+.nav {
+    margin-top: 10px;
+}
+
+.nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 16px;
+    position: relative;
+}
+
+.nav a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #ff6f61;
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s;
+}
+
+.nav a:hover::after {
+    width: 100%;
+}
+
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin: 50px 0;
+}
+
+.product a {
+    background-color: #fff;
+    width: 260px;
+    border-radius: 12px;
+    overflow: hidden;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    text-decoration: none;
+    color: inherit;
+}
+
+.product:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+.product img {
+    width: 100%;
+    height: 230px;
+    object-fit: contain;
+    background-color: #f5f5f5;
+}
+
+.product h3 {
+    font-size: 18px;
+    margin: 15px 0 5px;
+    color: #0d1b2a;
+}
+
+.price {
+    font-size: 17px;
+    font-weight: bold;
+    color: #ff6f61;
+    margin-bottom: 15px;
+}
+
+.product button {
+    background: linear-gradient(135deg, #ff6f61, #ff9a76);
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 85%;
+    margin-bottom: 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.product button:hover {
+    background: linear-gradient(135deg, #ff9a76, #ff6f61);
+    transform: scale(1.05);
+}
+
+
+.cart {
+    background-color: white;
+    max-width: 450px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.cart h2 {
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #0d1b2a;
+}
+
+.total {
+    font-weight: bold;
+    margin: 10px 0 20px;
+    color: #ff6f61;
+}
+
+.checkout {
+    background: linear-gradient(135deg, #0a8f08, #0fc10f);
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.checkout:hover {
+    background: linear-gradient(135deg, #0fc10f, #0a8f08);
+    transform: scale(1.03);
+}
+
+
+.footer {
+    background-color: #0d1b2a;
+    color: #fff;
+    text-align: center;
+    padding: 18px;
+    margin-top: 50px;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+
+@media (max-width: 900px) {
+    .product {
+        width: 45%;
+    }
+
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav {
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 500px) {
+    .product {
+        width: 100%;
+    }
+}
+
+.hero {
+    height: 70vh;
+    background: url("images/banner.jpg") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+}
+
+.hero-content {
+    position: relative;
+    color: white;
+    z-index: 2;
+}
+
+.hero h2 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+.hero-btn {
+    padding: 14px 35px;
+    background: white;
+    color: black;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.hero-btn:hover {
+    background: #111827;
+    color: white;
+}
+.header {
+    background: linear-gradient(135deg, #0d1b2a, #1b263b);
+    padding: 20px 0;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.logo h1 {
+    color: #fff;
+    font-size: 26px;
+    letter-spacing: 1px;
+}
+
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    padding: 0;
+    margin: 0;
+}
+
+
+.nav-menu li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 25px;
+    transition: 0.3s;
+    position: relative;
+}
+
+
+.nav-menu li a:hover {
+    background: #ff6f61;
+    box-shadow: 0 4px 12px rgba(255,111,97,0.4);
+}
+
+
+.nav-menu li a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background: #ff6f61;
+    transition: 0.3s;
+    transform: translateX(-50%);
+}
+
+.nav-menu li a:hover::after {
+    width: 60%;
+}
+
+.input{
+display:block;
+width:100%;
+padding:10px;
+margin:10px 0;
+border-radius:6px;
+border:1px solid #ccc;
+font-size:14px;
+}
+
+textarea.input{
+height:80px;
+resize:none;
+}
+
+#payment-form{
+max-width:350px;
+margin:auto;
+}
+
+#payment-form input{
+display:block;
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:6px;
+border:1px solid #ccc;
+font-size:15px;
+}
+
+.detail-btn {
+    margin-left:10px;
+    padding:5px 10px;
+    font-size:14px;
+    border-radius:5px;
+    border:none;
+    background:#0d1b2a;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.detail-btn:hover {
+    background:#ff6f61;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.footer h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.footer p {
+    margin: 5px 0;
+}
